@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Outbound — Interactive Atlas</title><meta name="description" content="Explore all four Outbound regions, find collectibles and save your progress."><link rel="icon" href="favicon.svg"><link rel="stylesheet" href="style.css?v=3"><script defer src="data.js"></script><script defer src="state.js?v=3"></script><script defer src="app.js?v=3"></script></head>
+<body>
+<aside id="sidebar">
+  <header><div class="eyebrow">YOUR ROAD TRIP COMPANION</div><h1>OUTBOUND<span>INTERACTIVE ATLAS</span></h1><p>A discovery around every bend.</p></header>
+  <label class="field">REGION<select id="region"></select></label>
+  <div class="progress-label"><span id="progressText"></span><span id="percent"></span></div><progress id="progress" max="100" value="0"></progress>
+  <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search a name or place…" aria-label="Search this region"></label>
+  <div class="section-title"><h2>Map legend</h2><button id="toggleAll" class="text-button">Hide all</button></div>
+  <div id="filters"></div>
+  <label class="hide"><input id="hideFound" type="checkbox"> Hide found locations</label>
+  <div class="section-title"><h2 id="resultsTitle">Map locations</h2><span id="resultCount"></span></div>
+  <div id="results" aria-label="Results"></div>
+  <footer><div class="backup"><button id="export">Export progress</button><button id="import">Import</button><input hidden type="file" id="importFile" accept="application/json,.json"></div><details><summary>About this map</summary><p>Four original maps with locations read from game components. The main collectible counts in the Starting Region match the in-game legend. Fishing Spots are locations, not the fish-species checklist shown by the game. Common resource nodes are not included.</p><p>Progress and notes stay in this browser. Export a backup to keep or transfer them. This is an unofficial project; game assets belong to their respective owners.</p></details></footer>
+</aside>
+<main id="mapArea"><button id="mobileMenu" aria-label="Open or close filters" aria-expanded="false">☰</button>
+  <div class="map-heading"><div><span class="eyebrow">EXPLORE THE REGION</span><h2 id="mapTitle"></h2></div><span class="badge">ALL REGIONS · LOCAL ATLAS</span></div>
+  <svg id="map" xmlns="http://www.w3.org/2000/svg" aria-label="Interactive map: drag to pan, scroll to zoom" tabindex="0"><image id="terrain" width="2048" height="2048"/><g id="markers"></g></svg>
+  <div class="map-tools"><button id="zoomIn" aria-label="Zoom in">+</button><button id="zoomOut" aria-label="Zoom out">−</button><button id="fit" aria-label="Fit map">⛶</button><div class="tool-separator"></div><button id="addPin" aria-label="Add a pin" title="Add a pin" aria-pressed="false">⚑</button></div>
+  <div class="map-caption"><span id="hint">Drag to explore · Scroll or + / − to zoom</span><span id="coords">N ↑</span></div>
+  <section id="detail" hidden aria-label="Location details"><button id="closeDetail" aria-label="Close details">×</button><div id="detailCategory" class="eyebrow"></div><h2 id="detailTitle"></h2><p id="detailLocation"></p><p id="positionWarning" hidden role="status"></p><button id="foundButton" class="primary">Mark as found</button><label class="field">YOUR NOTES<textarea id="note" rows="3" placeholder="A reminder for your next trip…"></textarea></label><button id="deletePin" hidden class="text-button">Delete personal pin</button></section>
+  <form id="pinForm" hidden><h2>A place to remember</h2><label class="field">NAME<input id="pinName" maxlength="100" required placeholder="e.g. Come back here with the camper"></label><div><button type="button" id="cancelPin">Cancel</button><button class="primary" type="submit">Save pin</button></div></form>
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+</main>
+</body></html>
+
+

@@ -1,0 +1,8 @@
+{
+  "name": "outbound-atlas",
+  "productName": "Outbound Atlas",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Offline community atlas for Outbound",
+  "main": "main.cjs"
+}
