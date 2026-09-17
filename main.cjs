@@ -20,9 +20,22 @@ app.whenReady().then(async () => {
     try {
       const result = await window.webContents.executeJavaScript(`(() => {
         const regions = [...document.querySelector('#region').options].map(o=>o.textContent);
+        const counts = [];
+        for (const option of document.querySelector('#region').options) {
+          document.querySelector('#region').value=option.value;
+          document.querySelector('#region').dispatchEvent(new Event('change'));
+          const search=document.querySelector('#search');search.value='Bottle Cap';search.dispatchEvent(new Event('input'));
+          counts.push(document.querySelector('#markers').children.length);
+        }
+        if(JSON.stringify(counts)!==JSON.stringify([55,60,48,33]))throw Error('Bottle cap counts: '+counts);
+        const marker=document.querySelector('#markers').firstElementChild;
+        marker.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));
+        document.querySelector('#foundButton').click();
+        if(!document.querySelector('#foundButton').textContent.toLowerCase().includes('undo'))throw Error('Found toggle failed');
+        document.querySelector('#foundButton').click();
         const images = [...document.querySelectorAll('image')].map(i=>i.getAttribute('href'));
         const key='atlas-desktop-smoke'; const previous=localStorage.getItem(key); localStorage.setItem(key,'ok');
-        return {title:document.title,regions,images,markers:document.querySelectorAll('#markers > *').length,storage:localStorage.getItem(key)==='ok',persisted:previous==='ok',body:document.body.innerText.slice(0,350)};
+        return {title:document.title,regions,bottleCapCounts:counts,images,markers:document.querySelectorAll('#markers > *').length,storage:localStorage.getItem(key)==='ok',persisted:previous==='ok',body:document.body.innerText.slice(0,350)};
       })()`);
       await session.defaultSession.flushStorageData();
       fs.writeFileSync(smoke.split('=')[1],JSON.stringify(result,null,2));

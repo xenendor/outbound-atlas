@@ -1,6 +1,6 @@
 # Outbound Atlas — Windows desktop
 
-An unofficial, English-language, offline interactive atlas containing 443 locations across all four regions.
+An unofficial, English-language, offline interactive atlas containing 639 locations (including 196 bottle cap pickup locations) across all four regions.
 
 ## Download and run
 
